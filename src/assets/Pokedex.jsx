@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
 import PokemonList from "./PokemonList";
-import pokelogo from "../images/pokelogo.png";
+import pokelog from "../images/pokelog.png";
 import pokeballColors from "../images/pokeballColors.png"
 
 
@@ -84,7 +84,7 @@ const Pokedex = () => {
         <main className="main">
             <img className="img-bg" src={pokeballColors} alt="" />
             <header className="header__logo">
-                <img className="header-img" src={pokelogo} alt="" />
+                <img className="header-img" src={pokelog} alt="" />
             </header>
             <div className="container__swiche">
                 <section className="section__welcome-user">
