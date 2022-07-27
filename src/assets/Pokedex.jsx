@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
 import PokemonList from "./PokemonList";
-import pokelog from "../images/pokelog.png";
+import pokelog from "../images/Pokelog.png";
 import pokeballColors from "../images/pokeballColors.png"
 
 
