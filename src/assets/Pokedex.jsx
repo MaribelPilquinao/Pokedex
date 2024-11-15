@@ -60,9 +60,9 @@ const Pokedex = () => {
     }
 
     return (
-        <main className='container-fluid'>
+        <main className='container-fluid 'style={{paddingLeft:'0'}}>
             <img className="img-bg-pokedex" src={bg_poke1} alt="" />
-            <header className='text-center mb-4'>
+            <header className='text-center mb-4 cont-img-header'>
                 <img className="header-img" src={pokelog} alt="" />
             </header>
             <div className='d-flex flex-wrap align-items-center mb-4 text-center custom-welcome'>

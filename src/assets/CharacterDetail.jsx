@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { setColor } from '../functionColors/setColors';
 import logoPokemon from '../images/logoPokemon.png';
 import maps from '../images/maps.png';
+import pokeballColors from '../images/pokeballColors.png';
 
 const CharacterDetail = () => {
     const [character, setCharacter] = useState({});
@@ -20,6 +21,7 @@ const CharacterDetail = () => {
             className='container-custom'
             style={{ background: setColor(character.types?.[0]?.type.name) }}
         >
+            <img className='img-poke_1' src={pokeballColors} alt="" />
             <div className='row'>
                 <div className='col-12 text-center'>
                     <img
