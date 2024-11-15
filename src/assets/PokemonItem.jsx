@@ -13,8 +13,8 @@ const PokemonItem = ({ pokemonUrl }) => {
   }, [pokemonUrl]);
 
   return (
-    <article className="card card-custom" style={{ background: setColor(character.types?.[0]?.type.name), width:'400px', height: '400px', marginBottom: '2.5rem' }} onClick={() => navigate(`/pokedex/${character.id}`)}>
-      <div className="card-body">
+    <article className="card card-custom" style={{ background: setColor(character.types?.[0]?.type.name), width:'20rem', height: '25rem', marginBottom: '2.5rem' }} onClick={() => navigate(`/pokedex/${character.id}`)}>
+      <div className="card-body" style={{width:'20rem', height: '25rem'}}>
         <h4 className="card-title text-uppercase text-center">{character.name}</h4>
         <hr />
         <p><strong>Type:</strong> {character.types?.[0].type.name}</p>
