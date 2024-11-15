@@ -1,9 +1,10 @@
-import './App.css'
-import { HashRouter, Routes, Route } from "react-router-dom";
-import UserInput from "./assets/UserInput";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { HashRouter, Route, Routes } from "react-router-dom";
+import './App.css';
 import CharacterDetail from "./assets/CharacterDetail";
 import Pokedex from "./assets/Pokedex";
 import ProtectedRoutes from './assets/ProtectedRoutes';
+import UserInput from "./assets/UserInput";
 
 
 

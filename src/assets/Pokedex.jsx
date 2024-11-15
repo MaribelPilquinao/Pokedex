@@ -2,149 +2,152 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux/es/exports";
 import { useNavigate } from "react-router-dom";
+import bg_poke1 from '../images/bg_poke1.jpg';
+import pokelog from '../images/Pokelog.png';
 import PokemonList from "./PokemonList";
-import pokelog from "../images/Pokelog.png";
-import pokeballColors from "../images/pokeballColors.png"
-
-
 
 const Pokedex = () => {
-    // https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1154 --- endpoint para todos los pokemon
-
     const user = useSelector(state => state.user);
-
     const [pokemons, setPokemons] = useState([]);
-    const [characterSearch, setCharacterSearch] = useState("")
-    const [types, setTypes] = useState([])
+    const [characterSearch, setCharacterSearch] = useState("");
+    const [types, setTypes] = useState([]);
     const [isChange, setIsChange] = useState(false);
     const [page, setPage] = useState(0);
-    
-
     const navigate = useNavigate();
 
     useEffect(() => {
-        
         axios.get(`https://pokeapi.co/api/v2/pokemon/?offset=0&limit=1154`)
-            .then(res => setPokemons(res.data.results))
-
+            .then(res => setPokemons(res.data.results));
         axios.get("https://pokeapi.co/api/v2/type")
-            .then(res => setTypes(res.data.results))
-    }, [])
+            .then(res => setTypes(res.data.results));
+    }, []);
 
     const search = e => {
         e.preventDefault();
-        navigate(`/pokedex/${characterSearch}`)
-            
-    }
+        navigate(`/pokedex/${characterSearch}`);
+    };
 
     const filteredPokemon = index => {
-
         axios.get(`https://pokeapi.co/api/v2/type/${String(+index + 1)}/`)
-            .then(res => setPokemons(res.data.pokemon))
-    }
-
-    console.log(pokemons)
+            .then(res => setPokemons(res.data.pokemon));
+    };
 
     const swiche = () => {
-        setIsChange(!isChange)
-    }
-
-    //paginación
+        setIsChange(!isChange);
+    };
 
     const itemPerPage = 12;
-
     const paginatedPokemons = () => {
         return pokemons.slice(page, page + itemPerPage);
-    }
+    };
 
     const nextPage = () => {
         if (pokemons.length > page + itemPerPage) {
             setPage(page + itemPerPage);
         }
-    }
+    };
 
     const prevPage = () => {
         if (page > 0) {
             setPage(page - itemPerPage);
         }
-    }
+    };
 
-    const totalPages = Math.ceil(pokemons.length / itemPerPage)
-
+    const totalPages = Math.ceil(pokemons.length / itemPerPage);
     let numbers = [];
     for (let i = 1; i <= totalPages; i++) {
         numbers.push(i);
     }
 
-
-
-
-
     return (
-        <main className="main">
-            <img className="img-bg" src={pokeballColors} alt="" />
-            <header className="header__logo">
+        <main className='container-fluid'>
+            <img className="img-bg-pokedex" src={bg_poke1} alt="" />
+            <header className='text-center mb-4'>
                 <img className="header-img" src={pokelog} alt="" />
             </header>
-            <div className="container__swiche">
-                <section className="section__welcome-user">
-                    <h3 className="welcome-user__text">Welcome {user} </h3><hr />
-                    <p style={{ marginTop: "1.3rem" }} className="welcome-user__text">here you can find your favorite pokemon</p>
+            <div className='d-flex flex-wrap align-items-center mb-4 text-center custom-welcome'>
+                <section className='w-100 w-md-50'>
+                    <h3 className='text-uppercase font-weight-bold'>{`Welcome ${user}`}</h3>
+                    <p className='mt-2'>
+                        Here you can find your favorite Pokemon
+                    </p>
                 </section>
-                <section className="section__swiche">
-                    <p>Selecciona por:</p>
+                <section className='w-100 w-md-50'>
+                    <p>Select by:</p>
                     <span>Types /</span>
-                    <input type="checkbox" onChange={swiche} className="input__swiche" />
-                    <span>Pokemon</span>
-                    <form action=""
-                        className="form__container"
+                    <input className=""
+                        type='checkbox'
+                        onChange={swiche}
+                    />
+                    <span> Pokemon</span>
+                    <form
+                        className='form-inline mt-3 custom-form mb-4'
                         onSubmit={search}
                     >
-                        {
-                            isChange ? (
-                                <>
-                                    <div>
-                                        <input type="text"
-                                            className="types__pokemons-form"
-                                            value={characterSearch}
-                                            onChange={e => setCharacterSearch(e.target.value)}
-                                        />
-                                        <button className="btn-types__pokemons-form" onClick={search}>Search</button>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <select id="type" onChange={e => filteredPokemon(e.target.value)} >
-                                        {
-                                            types?.map((type, index) => (
-                                                <option className="types__pokemons-form"
-                                                    value={index}
-                                                    key={type.name}>{type.name}</option>
-                                            ))
-                                        }
-                                    </select>
-                                </>
-                            )
-                        }
+                        {isChange ? (
+                            <div className='input-group'>
+                                <input
+                                    placeholder="Ingresa el nombre de tu pokemon"
+                                    type='text'
+                                    className='form-control'
+                                    value={characterSearch}
+                                    onChange={(e) =>
+                                        setCharacterSearch(e.target.value)
+                                    }
+                                />
+                                <button
+                                    className='btn btn-poke1'
+                                    type='submit'
+                                >
+                                    Search
+                                </button>
+                            </div>
+                        ) : (
+                            <select
+                                className='form-control'
+                                onChange={(e) =>
+                                    filteredPokemon(e.target.value)
+                                }
+                            >
+                                {types?.map((type, index) => (
+                                    <option
+                                        key={type.name}
+                                        value={index}
+                                    >
+                                        {type.name}
+                                    </option>
+                                ))}
+                            </select>
+                        )}
                     </form>
                 </section>
             </div>
-            <div>
-                <PokemonList paginatedPokemons={paginatedPokemons} />
-            </div>
-            <div className="btns__paginated">
-                <button className="btn__pages" onClick={prevPage}>
-                    Previos
+            <PokemonList paginatedPokemons={paginatedPokemons} />
+            <div className='pagination d-flex flex-wrap justify-content-center mt-4 '>
+                <button
+                    className='btn mx-2 btn-pag'
+                    onClick={prevPage}
+                >
+                    Previous
                 </button>
-                {numbers.map(number => (
-                    <button className="btn__pages-numbers" onClick={() => setPage(number)}>{number}</button>
+                {numbers.map((number) => (
+                    <button
+                        className='btn btn-pag-numbers mx-1 '
+                        key={number}
+                        onClick={() => setPage(number)}
+                    >
+                        {number}
+                    </button>
                 ))}
-                <button className="btn__pages" onClick={nextPage}>
-                    Nexts
+                <button
+                    className='btn mx-2 btn-pag '
+                    onClick={nextPage}
+                >
+                    Next
                 </button>
             </div>
         </main>
     );
 };
 
-export default Pokedex
+export default Pokedex;

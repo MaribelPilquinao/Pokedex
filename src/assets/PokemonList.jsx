@@ -3,17 +3,18 @@ import PokemonItem from './PokemonItem';
 
 const PokemonList = ({ paginatedPokemons }) => {
     return (
-        <div>
-            <ul className='container__card'>
+        <div className="container-fluid ">
+            <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 my-4 mx-auto">
                 {
-                    paginatedPokemons().map(pokemon =>(
-                        <PokemonItem
-                            pokemonUrl={pokemon.url ? pokemon.url : pokemon.pokemon.url}
-                            key={pokemon.url ? pokemon.url : pokemon.pokemon.url} />
+                    paginatedPokemons().map(pokemon => (
+                        <div className="col-1 mx-auto my-4 ms-4 " key={pokemon.url ? pokemon.url : pokemon.pokemon.url}>
+                            <PokemonItem
+                                pokemonUrl={pokemon.url ? pokemon.url : pokemon.pokemon.url}
+                            />
+                        </div>
                     ))
-                }        
-     
-            </ul>
+                }
+            </div>
         </div>
     );
 };
